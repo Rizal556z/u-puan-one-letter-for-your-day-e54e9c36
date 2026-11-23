@@ -23,12 +23,19 @@ import os
 LETTER = "K"
 
 
+def validate(letter):
+    """Mirror the scorer's gate: exactly one character, A to Z."""
+    if len(letter) != 1 or not ("A" <= letter <= "Z"):
+        raise ValueError("entry must be exactly one letter A-Z, got %r" % (letter,))
+    return letter
+
+
 def main():
     out_dir = os.environ.get("MAKEFUN_OUTPUT_DIR", "/output")
     os.makedirs(out_dir, exist_ok=True)
     path = os.path.join(out_dir, "entry.txt")
     with open(path, "w", encoding="utf-8") as f:
-        f.write(LETTER)
+        f.write(validate(LETTER))
 
 
 if __name__ == "__main__":
